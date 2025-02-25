@@ -331,4 +331,4 @@ class _ControlledGradientBoxState extends State<_ControlledGradientBox> {
       ),
     );
   }
-} 
+}

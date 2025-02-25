@@ -1,8 +1,8 @@
 name: animated_gradient_box
 description: A Flutter package that provides animated gradient borders for widgets with customizable colors, shapes, and animation controls.
 version: 0.0.1
-repository: https://github.com/YOUR_USERNAME/animated_gradient_border
-homepage: https://github.com/YOUR_USERNAME/animated_gradient_border
+repository: https://github.com/woogi-kang/animated_gradient_border
+homepage: https://github.com/woogi-kang/animated_gradient_border
 
 environment:
   sdk: ^3.3.0

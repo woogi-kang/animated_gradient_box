@@ -91,4 +91,4 @@ class GradientBoxBorder extends BoxBorder {
 
   @override
   int get hashCode => Object.hash(gradient, width);
-} 
+}
