@@ -64,11 +64,11 @@ GradientBox(
 )
 ```
 
-![Basic Gradient Box](images/basic_gradient_box.png)
-
 ### Static vs Animated
 
 Compare static gradient borders with animated ones:
+
+![Static vs Animated](https://github.com/user-attachments/assets/1282ad08-ec06-4931-9a2a-b1a569885516)
 
 ```dart
 // Static gradient border
@@ -104,11 +104,11 @@ GradientBox(
 )
 ```
 
-![Static vs Animated](images/static_vs_animated.png)
-
 ### Animation Controls
 
 Control the animation with various parameters:
+
+![Animation Controls](https://github.com/user-attachments/assets/f8eb2375-d498-4bc1-8464-edb50acf0b57)
 
 ```dart
 // Counter-clockwise animation
@@ -129,11 +129,11 @@ GradientBox(
 )
 ```
 
-![Animation Controls](images/animation_controls.png)
-
 ### Animation Speeds
 
 Customize the animation speed:
+
+![Animation Speeds](https://github.com/user-attachments/assets/8ce592a1-725b-4f84-b20e-e1a14d29e243)
 
 ```dart
 // Slow animation (4 seconds)
@@ -163,11 +163,11 @@ GradientBox(
 )
 ```
 
-![Animation Speeds](images/animation_speeds.png)
-
 ### Animation Curves
 
 Apply different animation curves:
+
+![Animation Curves](https://github.com/user-attachments/assets/d2def632-bfd4-414d-8233-4094920476d2)
 
 ```dart
 // Linear curve
@@ -197,8 +197,6 @@ GradientBox(
   borderRadius: BorderRadius.circular(8),
 )
 ```
-
-![Animation Curves](images/animation_curves.png)
 
 ## Customization
 
