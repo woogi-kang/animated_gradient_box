@@ -6,7 +6,7 @@ homepage: https://github.com/woogi-kang/animated_gradient_border
 
 environment:
   sdk: ^3.3.0
-  flutter: ^3.24.0
+  flutter: ">=3.24.0"
 
 dependencies:
   flutter:
