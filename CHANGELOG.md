@@ -1,3 +1,8 @@
+## 0.0.2
+   
+   * Updated package metadata
+   * Improved documentation
+
 ## 0.0.1
 
 * Initial release of animated_gradient_box
