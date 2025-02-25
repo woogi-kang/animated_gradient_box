@@ -1,46 +1,73 @@
 # Animated Gradient Border
 
-[![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
-[![Powered by Mason](https://img.shields.io/endpoint?url=https%3A%2F%2Ftinyurl.com%2Fmason-badge)](https://github.com/felangel/mason)
-[![License: MIT][license_badge]][license_link]
-
-A Very Good Project created by Very Good CLI.
+A Flutter package that provides animated gradient borders for widgets with customizable colors, shapes, and animation controls.
 
 ## Installation 💻
 
 **❗ In order to start using Animated Gradient Border you must have the [Flutter SDK][flutter_install_link] installed on your machine.**
 
-Install via `flutter pub add`:
+### Clone the Repository
+
+To get started, you can clone the repository from GitHub:
 
 ```sh
-dart pub add animated_gradient_border
+git clone https://github.com/YOUR_USERNAME/animated_gradient_border.git
+cd animated_gradient_border
 ```
 
----
+### Download the Package
 
-## Continuous Integration 🤖
+Alternatively, you can download the package as a ZIP file:
 
-Animated Gradient Border comes with a built-in [GitHub Actions workflow][github_actions_link] powered by [Very Good Workflows][very_good_workflows_link] but you can also add your preferred CI/CD solution.
+1. Go to the [GitHub repository](https://github.com/YOUR_USERNAME/animated_gradient_border).
+2. Click on the "Code" button.
+3. Select "Download ZIP".
+4. Extract the ZIP file to your desired location.
 
-Out of the box, on each pull request and push, the CI `formats`, `lints`, and `tests` the code. This ensures the code remains consistent and behaves correctly as you add functionality or make changes. The project uses [Very Good Analysis][very_good_analysis_link] for a strict set of analysis options used by our team. Code coverage is enforced using the [Very Good Workflows][very_good_coverage_link].
+### Add the Package to Your Project
+
+To use the Animated Gradient Border in your Flutter project, add it as a dependency in your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  animated_gradient_border:
+    path: ../path_to_your_cloned_or_downloaded_package
+```
+
+Then, run the following command to get the package:
+
+```sh
+flutter pub get
+```
+
+### Usage
+
+Import the package in your Dart file:
+
+```dart
+import 'package:animated_gradient_box/animated_gradient_box.dart';
+```
+
+Use the `GradientBox` widget in your Flutter application:
+
+```dart
+GradientBox(
+  colors: [Colors.blue, Colors.red],
+  child: Text('Hello, Gradient!'),
+)
+```
 
 ---
 
 ## Running Tests 🧪
 
-For first time users, install the [very_good_cli][very_good_cli_link]:
+To run all unit tests, use the following command:
 
 ```sh
-dart pub global activate very_good_cli
+flutter test
 ```
 
-To run all unit tests:
-
-```sh
-very_good test --coverage
-```
-
-To view the generated coverage report you can use [lcov](https://github.com/linux-test-project/lcov).
+To view the generated coverage report, you can use [lcov](https://github.com/linux-test-project/lcov).
 
 ```sh
 # Generate Coverage Report
@@ -51,18 +78,3 @@ open coverage/index.html
 ```
 
 [flutter_install_link]: https://docs.flutter.dev/get-started/install
-[github_actions_link]: https://docs.github.com/en/actions/learn-github-actions
-[license_badge]: https://img.shields.io/badge/license-MIT-blue.svg
-[license_link]: https://opensource.org/licenses/MIT
-[logo_black]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_black.png#gh-light-mode-only
-[logo_white]: https://raw.githubusercontent.com/VGVentures/very_good_brand/main/styles/README/vgv_logo_white.png#gh-dark-mode-only
-[mason_link]: https://github.com/felangel/mason
-[very_good_analysis_badge]: https://img.shields.io/badge/style-very_good_analysis-B22C89.svg
-[very_good_analysis_link]: https://pub.dev/packages/very_good_analysis
-[very_good_cli_link]: https://pub.dev/packages/very_good_cli
-[very_good_coverage_link]: https://github.com/marketplace/actions/very-good-coverage
-[very_good_ventures_link]: https://verygood.ventures
-[very_good_ventures_link_light]: https://verygood.ventures#gh-light-mode-only
-[very_good_ventures_link_dark]: https://verygood.ventures#gh-dark-mode-only
-[very_good_workflows_link]: https://github.com/VeryGoodOpenSource/very_good_workflows
-# animated_gradient_box
