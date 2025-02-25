@@ -35,12 +35,32 @@ Create a simple animated gradient border around any widget:
 
 ```dart
 GradientBox(
-  colors: [Colors.blue, Colors.red, Colors.green, Colors.yellow],
+  colors: [
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.yellow,
+  ],
   child: Container(
     width: 150,
     height: 100,
     child: Center(child: Text('Hello, Gradient!')),
   ),
+)
+```
+
+You can also use it without a child:
+
+```dart
+GradientBox(
+  width: 150,
+  height: 100,
+  colors: [
+    Colors.blue,
+    Colors.red,
+    Colors.green,
+    Colors.yellow,
+  ],
 )
 ```
 
@@ -81,7 +101,6 @@ GradientBox(
   ],
   borderWidth: 2,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 ```
 
@@ -107,7 +126,6 @@ GradientBox(
   ],
   clockwise: false,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 ```
 
@@ -125,7 +143,6 @@ GradientBox(
   colors: neonColors,
   animationDuration: Duration(seconds: 4),
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 
 // Default animation (2 seconds)
@@ -134,7 +151,6 @@ GradientBox(
   height: 100,
   colors: neonColors,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 
 // Fast animation (1 second)
@@ -144,7 +160,6 @@ GradientBox(
   colors: neonColors,
   animationDuration: Duration(seconds: 1),
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 ```
 
@@ -162,7 +177,6 @@ GradientBox(
   colors: goldColors,
   curve: Curves.linear,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 
 // Ease curve
@@ -172,7 +186,6 @@ GradientBox(
   colors: goldColors,
   curve: Curves.ease,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 
 // Bounce curve
@@ -182,7 +195,6 @@ GradientBox(
   colors: goldColors,
   curve: Curves.bounceInOut,
   borderRadius: BorderRadius.circular(8),
-  child: Container(),
 )
 ```
 
@@ -195,6 +207,7 @@ The `GradientBox` widget supports various customization options:
 | Property | Type | Description |
 |----------|------|-------------|
 | `colors` | `List<Color>` | The list of colors to use in the gradient |
+| `child` | `Widget?` | The widget to display inside the gradient border (optional) |
 | `animationDuration` | `Duration` | The duration of one complete animation cycle |
 | `curve` | `Curve` | The curve to use for the animation |
 | `borderWidth` | `double` | The width of the gradient border |

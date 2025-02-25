@@ -21,6 +21,23 @@ void main() {
       expect(find.byType(SizedBox), findsOneWidget);
     });
 
+    testWidgets('renders correctly without child', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: GradientBox(
+            colors: const [Colors.blue, Colors.red],
+            width: 100,
+            height: 100,
+          ),
+        ),
+      );
+
+      expect(find.byType(GradientBox), findsOneWidget);
+      expect(find.byType(Container), findsOneWidget);
+      // Should find SizedBox.shrink() as the default child
+      expect(find.byType(SizedBox), findsOneWidget);
+    });
+
     testWidgets('applies custom parameters correctly', (tester) async {
       const borderWidth = 2.0;
       const padding = EdgeInsets.all(8);

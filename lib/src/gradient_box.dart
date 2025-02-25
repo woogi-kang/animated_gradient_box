@@ -6,9 +6,9 @@ part of '../animated_gradient_box.dart';
 class GradientBox extends StatefulWidget {
   /// Creates an animated gradient bordered box.
   const GradientBox({
-    required this.child,
-    required this.colors,
     super.key,
+    required this.colors,
+    this.child,
     this.animate = true,
     this.animationDuration = const Duration(seconds: 2),
     this.curve = Curves.linear,
@@ -24,7 +24,8 @@ class GradientBox extends StatefulWidget {
   });
 
   /// The widget to display inside the gradient border.
-  final Widget child;
+  /// If null, an empty container will be used.
+  final Widget? child;
 
   /// The list of colors to use in the gradient.
   /// If [duplicateColorsInReverse] is true, the colors will be mirrored
@@ -171,7 +172,7 @@ class _GradientBoxState extends State<GradientBox>
           child: child,
         );
       },
-      child: widget.child,
+      child: widget.child ?? const SizedBox.shrink(),
     );
   }
 

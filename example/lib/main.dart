@@ -122,7 +122,6 @@ class ExamplePage extends StatelessWidget {
             colors: neonColors,
             borderWidth: 2,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
       ],
@@ -141,7 +140,6 @@ class ExamplePage extends StatelessWidget {
             height: 100,
             colors: oceanColors,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
         _LabeledBox(
@@ -159,7 +157,6 @@ class ExamplePage extends StatelessWidget {
             colors: rainbowColors,
             clockwise: false,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
       ],
@@ -179,7 +176,6 @@ class ExamplePage extends StatelessWidget {
             colors: neonColors,
             animationDuration: const Duration(seconds: 4),
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
         _LabeledBox(
@@ -189,7 +185,6 @@ class ExamplePage extends StatelessWidget {
             height: 100,
             colors: neonColors,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
         _LabeledBox(
@@ -200,7 +195,6 @@ class ExamplePage extends StatelessWidget {
             colors: neonColors,
             animationDuration: const Duration(seconds: 1),
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
       ],
@@ -220,7 +214,6 @@ class ExamplePage extends StatelessWidget {
             colors: goldColors,
             curve: Curves.linear,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
         _LabeledBox(
@@ -231,7 +224,6 @@ class ExamplePage extends StatelessWidget {
             colors: goldColors,
             curve: Curves.ease,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
         _LabeledBox(
@@ -242,7 +234,6 @@ class ExamplePage extends StatelessWidget {
             colors: goldColors,
             curve: Curves.bounceInOut,
             borderRadius: BorderRadius.circular(8),
-            child: Container(),
           ),
         ),
       ],
@@ -327,7 +318,6 @@ class _ControlledGradientBoxState extends State<_ControlledGradientBox> {
             colors: widget.colors,
             animate: _isAnimating,
             borderRadius: BorderRadius.circular(8),
-            child: Container(color: Colors.transparent),
           ),
           Positioned.fill(
             child: Center(
