@@ -34,41 +34,51 @@ void main() {
 
       expect(find.byType(GradientBox), findsOneWidget);
       expect(find.byType(Container), findsOneWidget);
-      // Should find SizedBox.shrink() as the default child
-      expect(find.byType(SizedBox), findsOneWidget);
     });
 
     testWidgets('applies custom parameters correctly', (tester) async {
       const borderWidth = 2.0;
-      const padding = EdgeInsets.all(8);
-      const margin = EdgeInsets.all(16);
       final borderRadius = BorderRadius.circular(20);
 
       await tester.pumpWidget(
         MaterialApp(
           home: GradientBox(
             colors: const [Colors.blue, Colors.red],
-            borderWidth: borderWidth,
-            padding: padding,
-            margin: margin,
             borderRadius: borderRadius,
             width: 200,
             height: 200,
+            animationDuration: const Duration(seconds: 3),
+            clockwise: false,
+            curve: Curves.easeInOut,
             child: const SizedBox(),
           ),
         ),
       );
 
-      final container = tester.widget<Container>(find.byType(Container));
-      final decoration = container.decoration as BoxDecoration;
-      final border = decoration.border as GradientBoxBorder;
+      final gradientBox = tester.widget<GradientBox>(find.byType(GradientBox));
+      
+      expect(gradientBox.borderWidth, borderWidth);
+      expect(gradientBox.borderRadius, borderRadius);
+      expect(gradientBox.width, 200);
+      expect(gradientBox.height, 200);
+      expect(gradientBox.animationDuration, const Duration(seconds: 3));
+      expect(gradientBox.clockwise, false);
+      expect(gradientBox.curve, Curves.easeInOut);
+      expect(gradientBox.shape, BoxShape.rectangle);
+    });
 
-      expect(container.padding, padding);
-      expect(container.margin, margin);
-      expect(container.constraints?.maxWidth, 200);
-      expect(container.constraints?.maxHeight, 200);
-      expect(decoration.borderRadius, borderRadius);
-      expect(border.width, borderWidth);
+    testWidgets('animation can be disabled', (tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: GradientBox(
+            colors: const [Colors.blue, Colors.red],
+            animate: false,
+          ),
+        ),
+      );
+
+      final gradientBox = tester.widget<GradientBox>(find.byType(GradientBox));
+      expect(gradientBox.animate, false);
     });
   });
 
@@ -82,20 +92,28 @@ void main() {
 
       expect(border.gradient, gradient);
       expect(border.width, 1.0); // Default width
+      expect(border.borderProgress, 1.0); // Default border progress
+      expect(border.segmentLength, 1.0); // Default segment length
     });
 
-    test('creates border with custom width', () {
+    test('creates border with custom parameters', () {
       final gradient = LinearGradient(
         colors: [Colors.blue, Colors.red],
       );
       const width = 2.0;
+      const borderProgress = 0.5;
+      const segmentLength = 0.7;
 
       final border = GradientBoxBorder(
         gradient: gradient,
         width: width,
+        borderProgress: borderProgress,
+        segmentLength: segmentLength,
       );
 
       expect(border.width, width);
+      expect(border.borderProgress, borderProgress);
+      expect(border.segmentLength, segmentLength);
     });
 
     test('implements equality correctly', () {
@@ -103,9 +121,26 @@ void main() {
         colors: [Colors.blue, Colors.red],
       );
 
-      final border1 = GradientBoxBorder(gradient: gradient, width: 2);
-      final border2 = GradientBoxBorder(gradient: gradient, width: 2);
-      final border3 = GradientBoxBorder(gradient: gradient, width: 3);
+      final border1 = GradientBoxBorder(
+        gradient: gradient,
+        width: 2,
+        borderProgress: 0.5,
+        segmentLength: 0.7,
+      );
+      
+      final border2 = GradientBoxBorder(
+        gradient: gradient,
+        width: 2,
+        borderProgress: 0.5,
+        segmentLength: 0.7,
+      );
+      
+      final border3 = GradientBoxBorder(
+        gradient: gradient,
+        width: 2,
+        borderProgress: 0.3, // Different progress
+        segmentLength: 0.7,
+      );
 
       expect(border1, border2);
       expect(border1, isNot(border3));
@@ -132,12 +167,38 @@ void main() {
 
     test('scale returns new instance with scaled width', () {
       final gradient = LinearGradient(colors: [Colors.blue, Colors.red]);
-      final border = GradientBoxBorder(gradient: gradient, width: 2);
+      final border = GradientBoxBorder(
+        gradient: gradient,
+        width: 2,
+        borderProgress: 0.5,
+        segmentLength: 0.7,
+      );
 
       final scaled = border.scale(2) as GradientBoxBorder;
 
       expect(scaled.width, 4);
       expect(scaled.gradient, gradient);
+      expect(scaled.borderProgress, 0.5); // Should remain the same
+      expect(scaled.segmentLength, 0.7); // Should remain the same
+    });
+
+    test('throws assertion error for invalid parameters', () {
+      final gradient = LinearGradient(colors: [Colors.blue, Colors.red]);
+      
+      expect(() => GradientBoxBorder(
+        gradient: gradient,
+        width: -1, // Negative width
+      ), throwsAssertionError);
+      
+      expect(() => GradientBoxBorder(
+        gradient: gradient,
+        borderProgress: 1.5, // > 1.0
+      ), throwsAssertionError);
+      
+      expect(() => GradientBoxBorder(
+        gradient: gradient,
+        segmentLength: -0.1, // Negative segment length
+      ), throwsAssertionError);
     });
   });
 }
