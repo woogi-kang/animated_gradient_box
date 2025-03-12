@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:animated_gradient_box/animated_gradient_box.dart';
+import 'dart:math' as math;
 
 void main() {
   runApp(const ExampleApp());
@@ -86,6 +87,12 @@ class ExamplePage extends StatelessWidget {
               const SizedBox(height: 32),
               const _SectionTitle('Animation Curves'),
               _buildAnimationCurvesRow(),
+              const SizedBox(height: 32),
+              const _SectionTitle('Border Length Control'),
+              _buildBorderProgressRow(),
+              const SizedBox(height: 32),
+              const _SectionTitle('Interactive Border Length'),
+              _buildAnimatedBorderProgressExample(),
             ],
           ),
         ),
@@ -239,6 +246,101 @@ class ExamplePage extends StatelessWidget {
       ],
     );
   }
+
+  // New method for demonstrating different border progress values
+  Widget _buildBorderProgressRow() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        _LabeledBox(
+          label: '25% Length',
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: GradientBoxBorder(
+                gradient: const LinearGradient(
+                  colors: rainbowColors,
+                ),
+                width: 3,
+                borderProgress: 0.0, // Start position
+                segmentLength: 0.25, // 25% of perimeter
+              ),
+            ),
+          ),
+        ),
+        _LabeledBox(
+          label: '50% Length',
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: GradientBoxBorder(
+                gradient: const LinearGradient(
+                  colors: rainbowColors,
+                ),
+                width: 3,
+                borderProgress: 0.0, // Start position
+                segmentLength: 0.5, // 50% of perimeter
+              ),
+            ),
+          ),
+        ),
+        _LabeledBox(
+          label: '75% Length',
+          child: Container(
+            width: 100,
+            height: 100,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              border: GradientBoxBorder(
+                gradient: const LinearGradient(
+                  colors: rainbowColors,
+                ),
+                width: 3,
+                borderProgress: 0.0, // Start position
+                segmentLength: 0.75, // 75% of perimeter
+              ),
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+
+  // New method for demonstrating interactive border progress control
+  Widget _buildAnimatedBorderProgressExample() {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _LabeledBox(
+            label: 'Chasing Light',
+            child: _ChasingLightBorderBox(
+              colors: neonColors,
+              segmentLength: 0.15, // 15% of perimeter
+            ),
+          ),
+          _LabeledBox(
+            label: 'Interactive',
+            child: _InteractiveBorderProgress(),
+          ),
+          _LabeledBox(
+            label: 'Light Trail',
+            child: _ChasingLightBorderBox(
+              colors: oceanColors,
+              segmentLength: 0.3, // 30% of perimeter
+              duration: const Duration(seconds: 3),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 }
 
 class _SectionTitle extends StatelessWidget {
@@ -329,6 +431,169 @@ class _ControlledGradientBoxState extends State<_ControlledGradientBox> {
           ),
         ],
       ),
+    );
+  }
+}
+
+// A widget with a slider to control border progress
+class _InteractiveBorderProgress extends StatefulWidget {
+  const _InteractiveBorderProgress();
+
+  @override
+  State<_InteractiveBorderProgress> createState() => _InteractiveBorderProgressState();
+}
+
+class _InteractiveBorderProgressState extends State<_InteractiveBorderProgress> {
+  double _borderProgress = 0.5;
+  double _segmentLength = 0.2; // Default to 20%
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: GradientBoxBorder(
+              gradient: const LinearGradient(
+                colors: [
+                  Color(0xFFFF0000), // Red
+                  Color(0xFFFF8C00), // Orange
+                  Color(0xFFFFFF00), // Yellow
+                  Color(0xFF00FF00), // Green
+                  Color(0xFF0000FF), // Blue
+                  Color(0xFF4B0082), // Indigo
+                  Color(0xFF9400D3), // Violet
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+              width: 3,
+              borderProgress: _borderProgress,
+              segmentLength: _segmentLength,
+            ),
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          'Position: ${(_borderProgress * 100).toInt()}%',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        SizedBox(
+          width: 120,
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackHeight: 2,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+            ),
+            child: Slider(
+              value: _borderProgress,
+              min: 0.0,
+              max: 1.0,
+              onChanged: (value) {
+                setState(() {
+                  _borderProgress = value;
+                });
+              },
+            ),
+          ),
+        ),
+        Text(
+          'Length: ${(_segmentLength * 100).toInt()}%',
+          style: Theme.of(context).textTheme.bodySmall,
+        ),
+        SizedBox(
+          width: 120,
+          child: SliderTheme(
+            data: SliderTheme.of(context).copyWith(
+              trackHeight: 2,
+              thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 6),
+            ),
+            child: Slider(
+              value: _segmentLength,
+              min: 0.1,
+              max: 1.0,
+              onChanged: (value) {
+                setState(() {
+                  _segmentLength = value;
+                });
+              },
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+// A widget with an animated chasing light effect
+class _ChasingLightBorderBox extends StatefulWidget {
+  const _ChasingLightBorderBox({
+    required this.colors,
+    this.segmentLength = 0.2,
+    this.duration = const Duration(seconds: 2),
+  });
+
+  final List<Color> colors;
+  final double segmentLength;
+  final Duration duration;
+
+  @override
+  State<_ChasingLightBorderBox> createState() => _ChasingLightBorderBoxState();
+}
+
+class _ChasingLightBorderBoxState extends State<_ChasingLightBorderBox>
+    with SingleTickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _progressAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    
+    // Setup animation controller
+    _controller = AnimationController(
+      duration: widget.duration,
+      vsync: this,
+    );
+
+    // Simple linear animation that continuously loops from 0.0 to 1.0
+    _progressAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(_controller);
+    
+    // Start the animation
+    _controller.repeat();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _controller,
+      builder: (context, child) {
+        return Container(
+          width: 100,
+          height: 100,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(8),
+            border: GradientBoxBorder(
+              gradient: LinearGradient(
+                colors: widget.colors,
+              ),
+              width: 3,
+              borderProgress: _progressAnimation.value,
+              segmentLength: widget.segmentLength,
+            ),
+          ),
+        );
+      },
     );
   }
 }
